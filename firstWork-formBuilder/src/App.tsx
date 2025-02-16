@@ -1,7 +1,7 @@
 import "./App.css";
 import { useIsUserStored } from "./hooks/useIsUserStored";
-import MyForms from "./Onboarded/MyForms";
-import Welcome from "./Onboarding/Welcome";
+import MyForms from "./features/onboarded/MyForms";
+import Welcome from "./features/onboarding/Welcome";
 
 function App() {
   const isUser = useIsUserStored();

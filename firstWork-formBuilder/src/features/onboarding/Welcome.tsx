@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import Loader from "../Components/Loader/Loader";
+import Loader from "../../components/Loader/Loader";
 
 function Welcome() {
   const [userName, setUserName] = useState<string>("");

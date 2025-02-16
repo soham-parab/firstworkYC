@@ -6,7 +6,7 @@ interface LoaderProps {
   trigger?: boolean;
 }
 
-function Loader({ delay = 3000, trigger = false }: LoaderProps) {
+function Loader({ delay = 200, trigger = false }: LoaderProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
