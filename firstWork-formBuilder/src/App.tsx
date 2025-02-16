@@ -1,24 +1,11 @@
 import "./App.css";
+import { useIsUserStored } from "./hooks/useIsUserStored";
+import MyForms from "./Onboarded/MyForms";
+import Welcome from "./Onboarding/Welcome";
 
 function App() {
-  return (
-    <div className="container">
-      <h1>Welcome to your seamless form builder!</h1>
-      <h3>Let's start with your name!</h3>
-
-      <div className="input-container">
-        <input
-          type="text"
-          placeholder="Enter your name"
-          className="name-input"
-        />
-        <button className="next-button">Next</button>
-      </div>
-      <div className="content">
-        {/* Your form builder content will go here */}
-      </div>
-    </div>
-  );
+  const isUser = useIsUserStored();
+  return <div className="container">{isUser ? <MyForms /> : <Welcome />}</div>;
 }
 
 export default App;
