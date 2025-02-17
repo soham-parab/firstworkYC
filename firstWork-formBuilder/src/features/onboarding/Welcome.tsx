@@ -2,20 +2,24 @@ import { useState, ChangeEvent } from "react";
 import Loader from "../../components/Loader/Loader";
 import Toast from "../../components/Toast/Toast";
 import { useUserContext } from "../../state/useUserContext";
+import { useAsyncCallback } from "../../hooks/handleAsyncCallbacks";
 
 function Welcome() {
-  const [loader, setLoader] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
   const [inputName, setInputName] = useState<string>("");
   const { createUser } = useUserContext();
+
   const handleNext = (): void => {
-    if (!inputName) {
-      setErrorMessage("Please enter your name");
-      return;
+    if (inputName) {
+      createUser(inputName);
     }
-    setLoader(true);
-    createUser(inputName);
   };
+
+  const { isLoading, executeCallback, delay } = useAsyncCallback(
+    handleNext,
+    500
+  );
+
+  console.log(isLoading);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputName(event.target.value);
@@ -33,19 +37,22 @@ function Welcome() {
           className="name-input"
           onChange={handleChange}
         />
-        <button className="next-button" onClick={handleNext}>
+        <button className="next-button" onClick={executeCallback}>
           Next
         </button>
       </div>
       <div className="content">
         {/* Your form builder content will go here */}
       </div>
-      <Loader trigger={loader} />
-      <Toast
-        message={errorMessage}
-        type="error"
-        onClose={() => setErrorMessage("")}
-      />
+      <Loader trigger={isLoading} delay={delay} />
+      {!inputName && (
+        <Toast
+          message={"Please enter username"}
+          type="error"
+          show={isLoading}
+          delay={delay}
+        />
+      )}
     </div>
   );
 }

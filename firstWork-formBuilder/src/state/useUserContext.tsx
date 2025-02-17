@@ -1,3 +1,4 @@
+import React from "react";
 import { createContext, useContext, ReactNode, useState } from "react";
 
 interface UserContextType {
@@ -5,10 +6,16 @@ interface UserContextType {
   isAuthenticated: boolean;
   setUserName: (name: string) => void;
   clearUser: () => void;
-  createUser: () => void;
+  createUser: (name: string) => void;
 }
 
-const UserContext = createContext<UserContextType | undefined>(undefined);
+const UserContext = createContext<UserContextType>({
+  userName: "",
+  isAuthenticated: false,
+  setUserName: () => {},
+  clearUser: () => {},
+  createUser: () => {},
+});
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [userName, setUserName] = useState<string>(

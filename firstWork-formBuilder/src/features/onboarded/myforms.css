@@ -1,11 +1,16 @@
 .signMeOut {
-  position: relative;
-  top: 50px;
+  position: fixed;
+  right: 30px;
+  top: 30px;
+  width: 200px;
 }
-
+.createBtn {
+  position: relative;
+  width: 200px;
+  top: 30px;
+}
 .profileButtons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  width: 300px;
 }

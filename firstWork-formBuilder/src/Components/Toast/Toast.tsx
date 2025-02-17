@@ -1,25 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./Toast.css";
 
 interface ToastProps {
   message: string;
   type: "warning" | "success" | "error";
   onClose?: () => void;
+  show: boolean;
+  delay?: number;
 }
 
-const Toast = ({ message, type, onClose }: ToastProps) => {
-  const [isVisible, setIsVisible] = useState(true);
-
+const Toast = ({
+  message,
+  type,
+  onClose = () => {},
+  show,
+  delay = 1200,
+}: ToastProps) => {
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-      onClose?.();
-    }, 3000);
-
+    let timer = 0;
+    if (show) {
+      timer = setTimeout(() => {
+        onClose();
+      }, delay);
+    }
     return () => clearTimeout(timer);
-  }, [onClose]);
+  }, [show, onClose]);
 
-  if (!isVisible) return null;
+  if (!show) return null;
 
   return <div className={`toast toast-${type}`}>{message}</div>;
 };

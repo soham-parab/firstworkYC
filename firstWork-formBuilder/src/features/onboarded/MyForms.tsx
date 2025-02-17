@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CreateFormPage from "./CreateFormPage";
 import { useUserContext } from "../../state/useUserContext";
-
+import "./myforms.css";
 function MyForms() {
   const [createClicked, setCreateClicked] = useState(false);
 
@@ -15,9 +15,10 @@ function MyForms() {
     <div>
       <h2>Hi {userName}, create a form or check your previous forms!</h2>
       <div className="profileButtons">
-        <button className="signMeOut" onClick={handleCreate}>
+        <button className="createBtn" onClick={handleCreate}>
           Create
         </button>
+        <button className="createBtn">My forms</button>
         <button className="signMeOut" onClick={clearUser}>
           Signout
         </button>
