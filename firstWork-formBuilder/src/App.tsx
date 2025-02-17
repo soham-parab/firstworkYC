@@ -1,11 +1,15 @@
 import "./App.css";
-import { useIsUserStored } from "./hooks/useIsUserStored";
 import MyForms from "./features/onboarded/MyForms";
 import Welcome from "./features/onboarding/Welcome";
+import { useUserContext } from "./state/useUserContext";
 
 function App() {
-  const isUser = useIsUserStored();
-  return <div className="container">{isUser ? <MyForms /> : <Welcome />}</div>;
+  const { isAuthenticated } = useUserContext();
+  return (
+    <div className="container">
+      {isAuthenticated ? <MyForms /> : <Welcome />}
+    </div>
+  );
 }
 
 export default App;

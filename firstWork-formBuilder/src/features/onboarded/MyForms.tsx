@@ -1,15 +1,14 @@
 import { useState } from "react";
 import CreateFormPage from "./CreateFormPage";
+import { useUserContext } from "../../state/useUserContext";
 
 function MyForms() {
-  const handleFresh = (): void => {
-    localStorage.removeItem("userName");
-  };
   const [createClicked, setCreateClicked] = useState(false);
 
   const handleCreate = () => {
     setCreateClicked(true);
   };
+  const { clearUser } = useUserContext();
 
   const userName = localStorage.getItem("userName");
   return !createClicked ? (
@@ -19,7 +18,7 @@ function MyForms() {
         <button className="signMeOut" onClick={handleCreate}>
           Create
         </button>
-        <button className="signMeOut" onClick={handleFresh}>
+        <button className="signMeOut" onClick={clearUser}>
           Signout
         </button>
       </div>
