@@ -7,6 +7,8 @@ interface UserContextType {
   setUserName: (name: string) => void;
   clearUser: () => void;
   createUser: (name: string) => void;
+  goTo: (name: string) => void;
+  page: string;
 }
 
 const UserContext = createContext<UserContextType>({
@@ -15,12 +17,15 @@ const UserContext = createContext<UserContextType>({
   setUserName: () => {},
   clearUser: () => {},
   createUser: () => {},
+  goTo: () => {},
+  page: "home",
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [userName, setUserName] = useState<string>(
     localStorage.getItem("userName") || ""
   );
+  const [currentPage, setCurrentPage] = useState<string>("home");
 
   const isAuthenticated = Boolean(userName && localStorage.getItem("userName"));
 
@@ -40,6 +45,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setUserName: setUserName,
     createUser: handleSetUserName,
     clearUser: handleClearUser,
+    page: currentPage,
+    goTo: setCurrentPage,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

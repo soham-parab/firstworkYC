@@ -19,8 +19,6 @@ function Welcome() {
     500
   );
 
-  console.log(isLoading);
-
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setInputName(event.target.value);
   };
@@ -41,9 +39,7 @@ function Welcome() {
           Next
         </button>
       </div>
-      <div className="content">
-        {/* Your form builder content will go here */}
-      </div>
+      <div className="content"></div>
       <Loader trigger={isLoading} delay={delay} />
       {!inputName && (
         <Toast
